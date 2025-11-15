@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="bee">
+  <link name="base_link">
+    <!-- Make kinematic so it doesn't fall -->
+    <kinematic>true</kinematic>
+
+    <!-- Visual -->
+    <visual name="bee_visual">
+      <geometry>
+        <box><size>1 1 1</size></box>
+      </geometry>
+      <material>
+        <ambient>1 1 0 1</ambient> <!-- Bright yellow -->
+        <diffuse>1 1 0 1</diffuse>
+      </material>
+    </visual>
+
+    <!-- Collision -->
+    <collision name="bee_collision">
+      <geometry>
+        <box><size>1 1 1</size></box>
+      </geometry>
+    </collision>
+
+    <!-- Inertial -->
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="0.0001" iyy="0.0001" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- Gazebo settings -->
+  <gazebo reference="base_link">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+</robot>

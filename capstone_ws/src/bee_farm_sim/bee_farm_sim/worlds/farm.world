@@ -1,0 +1,919 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="farm_world">
+
+    <!-- Physics -->
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <!-- Gravity -->
+    <gravity>0 0 -9.8</gravity>
+
+    <!-- Plugins for ROS services
+    <plugin name="gazebo_ros_api_plugin" filename="libgazebo_ros_api_plugin.so"/> -->
+    
+    <!-- Atmosphere -->
+    <atmosphere type="adiabatic"/>
+
+    <!-- Scene -->
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- Ground Plane -->
+    <model name='ground_plane'>
+      <static>true</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction><ode/></friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Grass Patch -->
+    <model name="grass_patch">
+      <static>true</static>
+      <link name="link">
+        <visual name="grass_visual">
+          <geometry>
+            <box>
+              <size>15 15 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.1 0.6 0.1 1</ambient>
+            <diffuse>0.1 0.6 0.1 1</diffuse>
+          </material>
+          <pose>0 0 0.05 0 0 0</pose>
+        </visual>
+        <collision name="grass_collision">
+          <geometry>
+            <box>
+              <size>15 15 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- 30 Random Flowers -->
+    <!-- flower format: <model name="flowerX"><link><visual stem><visual top></link><pose/></model> -->
+
+    <model name="flower1">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+          <pose>0 0 2.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 2.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-6.21 3.47 0 0 0 0</pose>
+    </model>
+
+    <model name="flower2">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 0.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 1 0 1</ambient><diffuse>1 1 0 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <pose>0 0 0.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>4.9199999999999999 -1.1299999999999999 0 0 0 0</pose>
+    </model>
+
+    <model name="flower3">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>4.5</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 2.25 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 1 1</ambient><diffuse>1 0 1 1</diffuse></material>
+          <pose>0 0 4.5 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>4.5</length></cylinder></geometry>
+          <pose>0 0 2.25 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 4.5 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>0.55000000000000004 6.3399999999999999 0 0 0 0</pose>
+    </model>
+
+    <model name="flower4">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 0.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0.5 0 1</ambient><diffuse>1 0.5 0 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <pose>0 0 0.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-3.78 -5.62 0 0 0 0</pose>
+    </model>
+
+    <model name="flower5">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>4.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 2.0 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>0.5 0 0.5 1</ambient><diffuse>0.5 0 0.5 1</diffuse></material>
+          <pose>0 0 4.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>4.0</length></cylinder></geometry>
+          <pose>0 0 2.0 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 4.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>2.11 2.87 0 0 0 0</pose>
+    </model>
+
+    <model name="flower6">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 0.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 1 0.5 1</ambient><diffuse>1 1 0.5 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <pose>0 0 0.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>2.7268669605255127 -0.98000001907348633 0 0 0 0</pose>
+    </model>
+
+    <model name="flower7">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 1 1</ambient><diffuse>1 0 1 1</diffuse></material>
+          <pose>0 0 2.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 2.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>5.0106801986694336 -3.7122397422790527 0 0 0 0</pose>
+    </model>
+
+    <model name="flower8">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.75 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0.5 0.5 1</ambient><diffuse>1 0.5 0.5 1</diffuse></material>
+          <pose>0 0 3.5 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <pose>0 0 1.75 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.5 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-5.76 5.21 0 0 0 0</pose>
+    </model>
+
+    <model name="flower9">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.75 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 0.5 1</ambient><diffuse>1 0 0.5 1</diffuse></material>
+          <pose>0 0 3.5 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <pose>0 0 1.75 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.5 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>3.88 -6.14 0 0 0 0</pose>
+    </model>
+
+    <!-- <model name="flower10">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 0.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 1 0 1</ambient><diffuse>1 1 0 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <pose>0 0 0.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-1.1677910089492798 1.7102899551391602 0 0 0 0</pose>
+    </model> -->
+
+    <model name="flower11">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+          <pose>0 0 2.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 2.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-2.7699999809265137 -0.95477199554443359 0 0 0 0</pose>
+    </model>
+
+    <model name="flower12">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 1 0 1</ambient><diffuse>1 1 0 1</diffuse></material>
+          <pose>0 0 3.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <pose>0 0 1.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>0.19871200621128082 -2.5511820316314697 0 0 0 0</pose>
+    </model>
+
+    <model name="flower13">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>4.5</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 2.25 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 1 1</ambient><diffuse>1 0 1 1</diffuse></material>
+          <pose>0 0 4.5 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>4.5</length></cylinder></geometry>
+          <pose>0 0 2.25 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 4.5 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-3.0538747310638428 -3.3986799716949463 0 0 0 0</pose>
+    </model>
+
+    <model name="flower14">
+      <static>true</static>
+      <link name="link">
+        <!-- Stem -->
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.5 0 0 0</pose>
+        </visual>
+        <!-- Top -->
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0.5 0 1</ambient><diffuse>1 0.5 0 1</diffuse></material>
+          <pose>0 0 3.0 0 0 0</pose>
+        </visual>
+        <!-- Collisions -->
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <pose>0 0 1.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.0 0 0 0</pose>
+        </collision>
+
+        <!-- Bee visual attached to the flower -->
+        <visual name="bee_visual">
+        <geometry>
+            <box><size>0.2 0.2 0.2</size></box>
+        </geometry>
+        <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+        </material>
+        <!-- position relative to flower link -->
+        <pose>0 0 3.1 0 0 0</pose>
+        </visual>
+        <collision name="bee_collision">
+        <geometry>
+            <box><size>0.2 0.2 0.2</size></box>
+        </geometry>
+        <pose>0 0 3.1 0 0 0</pose>
+        </collision>
+
+      </link>
+      <!-- World pose -->
+      <pose>-5.98816 -4.31248 0 0 0 0</pose>
+    </model>
+
+    <!-- Flower 15 -->
+    <model name="flower15">
+      <static>true</static>
+      <link name="link">
+        <!-- Stem -->
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>4.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 2.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>4.0</length></cylinder></geometry>
+          <pose>0 0 2.0 0 0 0</pose>
+        </collision>
+
+        <!-- Top -->
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>0.5 0 0.5 1</ambient><diffuse>0.5 0 0.5 1</diffuse></material>
+          <pose>0 0 4.0 0 0 0</pose>
+        </visual>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 4.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>3.77 0.88 0 0 0 0</pose>
+    </model>
+
+    <!-- Flower 16 -->
+    <model name="flower16">
+      <static>true</static>
+      <link name="link">
+        <!-- Stem -->
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.5 0 0 0</pose>
+        </visual>
+        <!-- Top -->
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0.5 0 1</ambient><diffuse>1 0.5 0 1</diffuse></material>
+          <pose>0 0 3.0 0 0 0</pose>
+        </visual>
+        <!-- Collisions -->
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <pose>0 0 1.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.0 0 0 0</pose>
+        </collision>
+      </link>
+      <!-- World pose -->
+      <pose>-0.55 4.11 0 0 0 0</pose>
+    </model>
+
+    <!-- Flower 17 -->
+    <model name="flower17">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 1 1</ambient><diffuse>1 0 1 1</diffuse></material>
+          <pose>0 0 2.0 0 0 0</pose>
+        </visual>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 2.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>2.44 -3.66 0 0 0 0</pose>
+    </model>
+
+    <!-- Flower 18 -->
+    <model name="flower18">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.75 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <pose>0 0 1.75 0 0 0</pose>
+        </collision>
+
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0.5 0.5 1</ambient><diffuse>1 0.5 0.5 1</diffuse></material>
+          <pose>0 0 3.5 0 0 0</pose>
+        </visual>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.5 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-5.99 1.55 0 0 0 0</pose>
+    </model>
+
+    <!-- Flower 19 -->
+    <model name="flower19">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.75 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <pose>0 0 1.75 0 0 0</pose>
+        </collision>
+
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 0.5 1</ambient><diffuse>1 0 0.5 1</diffuse></material>
+          <pose>0 0 3.5 0 0 0</pose>
+        </visual>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.5 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>0.11 -6.22 0 0 0 0</pose>
+    </model>
+    
+    <!-- Flower 20 -->
+    <model name="flower20">
+      <static>true</static>
+      <link name="link">
+        <!-- Stem -->
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.5 0 0 0</pose>
+        </visual>
+        <!-- Top -->
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0.5 0 1</ambient><diffuse>1 0.5 0 1</diffuse></material>
+          <pose>0 0 3.0 0 0 0</pose>
+        </visual>
+        <!-- Collisions -->
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <pose>0 0 1.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.0 0 0 0</pose>
+        </collision>
+
+        <!-- Bee visual attached to the flower -->
+        <visual name="bee_visual">
+        <geometry>
+            <box><size>0.2 0.2 0.2</size></box>
+        </geometry>
+        <material>
+            <ambient>0 0 0 1</ambient>
+            <diffuse>0 0 0 1</diffuse>
+        </material>
+        <!-- position relative to flower link -->
+        <pose>0 0 3.1 0 0 0</pose>
+        </visual>
+        <collision name="bee_collision">
+        <geometry>
+            <box><size>0.2 0.2 0.2</size></box>
+        </geometry>
+        <pose>0 0 3.1 0 0 0</pose>
+        </collision>
+
+      </link>
+      <!-- World pose -->
+      <pose>6 3.33 0 0 0 0</pose>
+    </model>
+
+    <model name="flower21">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 0 1</ambient><diffuse>1 0 0 1</diffuse></material>
+          <pose>0 0 2.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>2.0</length></cylinder></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 2.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-4.5499999999999998 1.78 0 0 0 0</pose>
+    </model>
+
+    <model name="flower22">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 1 0 1</ambient><diffuse>1 1 0 1</diffuse></material>
+          <pose>0 0 3.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <pose>0 0 1.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-6 -1.12 0 0 0 0</pose>
+    </model>
+
+    <model name="flower23">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>4.5</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 2.25 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 1 1</ambient><diffuse>1 0 1 1</diffuse></material>
+          <pose>0 0 4.5 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>4.5</length></cylinder></geometry>
+          <pose>0 0 2.25 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 4.5 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-3.4500000000000002 0.44 0 0 0 0</pose>
+    </model>
+
+    <model name="flower24">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0.5 0 1</ambient><diffuse>1 0.5 0 1</diffuse></material>
+          <pose>0 0 3.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <pose>0 0 1.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-1.1100000000000001 5.8899999999999997 0 0 0 0</pose>
+    </model>
+
+    <model name="flower25">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>4.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 2.0 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>0.5 0 0.5 1</ambient><diffuse>0.5 0 0.5 1</diffuse></material>
+          <pose>0 0 4.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>4.0</length></cylinder></geometry>
+          <pose>0 0 2.0 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 4.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>0.62909823656082153 3.9000000953674316 0 0 0 0</pose>
+    </model>
+
+    <model name="flower26">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 1 0.5 1</ambient><diffuse>1 1 0.5 1</diffuse></material>
+          <pose>0 0 3.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.0</length></cylinder></geometry>
+          <pose>0 0 1.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-4.11 -1.98412 0 0 0 0</pose>
+    </model>
+
+    <model name="flower27">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>5.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 2.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 1 1</ambient><diffuse>1 0 1 1</diffuse></material>
+          <pose>0 0 5.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>5.0</length></cylinder></geometry>
+          <pose>0 0 2.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 5.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-2.92136 3.47924 0 0 0 0</pose>
+    </model>
+
+    <model name="flower28">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.75 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0.5 0.5 1</ambient><diffuse>1 0.5 0.5 1</diffuse></material>
+          <pose>0 0 3.5 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <pose>0 0 1.75 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.5 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>0.96102756261825562 -4.2900199890136719 0 0 0 0</pose>
+    </model>
+
+    <model name="flower29">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 1.75 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 0 0.5 1</ambient><diffuse>1 0 0.5 1</diffuse></material>
+          <pose>0 0 3.5 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>3.5</length></cylinder></geometry>
+          <pose>0 0 1.75 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 3.5 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>-1.5600000000000001 -4.8799999999999999 0 0 0 0</pose>
+    </model>
+
+    <model name="flower30">
+      <static>true</static>
+      <link name="link">
+        <visual name="stem_visual">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <material><ambient>0 0.5 0 1</ambient><diffuse>0 0.5 0 1</diffuse></material>
+          <pose>0 0 0.5 0 0 0</pose>
+        </visual>
+        <visual name="top_visual">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <material><ambient>1 1 0 1</ambient><diffuse>1 1 0 1</diffuse></material>
+          <pose>0 0 1.0 0 0 0</pose>
+        </visual>
+        <collision name="stem_collision">
+          <geometry><cylinder><radius>0.05</radius><length>1.0</length></cylinder></geometry>
+          <pose>0 0 0.5 0 0 0</pose>
+        </collision>
+        <collision name="top_collision">
+          <geometry><sphere><radius>0.1</radius></sphere></geometry>
+          <pose>0 0 1.0 0 0 0</pose>
+        </collision>
+      </link>
+      <pose>3.9900000000000002 5.1100000000000003 0 0 0 0</pose>
+    </model>
+
+    <!-- Directional Light -->
+    <light name='sun' type='directional'>
+      <pose>0 0 10 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>-0.5 0.1 -0.9</direction>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <linear>0.01</linear>
+        <constant>0.9</constant>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+    </light>
+
+  </world>
+</sdf>

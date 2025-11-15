@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Fixed joint to pole -->
+  <joint name="lidar_joint" type="fixed">
+    <parent link="pole"/>
+    <child link="lidar_frame"/>
+    <origin xyz="0 0 3.1" rpy="0 0 0"/>
+  </joint>
+
+  <!-- LiDAR link -->
+  <link name="lidar_frame">
+    <visual>
+      <geometry>
+        <cylinder radius="0.08" length="0.05"/>
+      </geometry>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder radius="0.08" length="0.05"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- Gazebo LiDAR sensor configuration -->
+  <gazebo reference="lidar_frame">
+    <material>Gazebo/Red</material>
+
+    <!-- LiDAR Sensor -->
+    <sensor name="lidar" type="ray">
+      <always_on>true</always_on>
+      <update_rate>10</update_rate>
+      <visualize>true</visualize> <!-- Show rays in Gazebo -->
+      <pose>0 0 0 0 0 0</pose>
+
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>              <!-- <samples>811</samples>  -->
+            <resolution>1</resolution>          <!-- <resolution>0.005818</resolution> -->
+            <min_angle>-0.7854</min_angle>      <!-- -45 degrees -->
+            <max_angle>3.9270</max_angle>       <!-- 225 degrees -->
+          </horizontal>
+        </scan>
+
+        <range>
+          <min>0.2</min> <!-- <min>0.05</min> -->    <!-- in meters -->
+          <max>12.0</max> <!-- <max>10.0</max> -->  <!-- in meters -->
+          <resolution>0.01</resolution>
+        </range>
+      </ray>
+
+      <!-- ROS 2 Plugin -->
+      <plugin name="gazebo_ros_laser_controller" filename="libgazebo_ros_ray_sensor.so">
+        <ros>
+          <namespace>/</namespace>
+          <argument>~/out:=/scan</argument>
+        </ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar_frame</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>
