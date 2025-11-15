@@ -32,7 +32,7 @@ setup(
         'console_scripts': [
             'scan_filter_node = bee_farm_sim.scripts.scan_filter_node:main',  
             'bee_heatmap_generator = bee_farm_sim.scripts.bee_heatmap_generator:main',
-            'bee_controller = bee_farm_sim.scripts.bee_controller:main',    
+            'cube_teleop = bee_farm_sim.scripts.cube_teleop:main',
         ],
     },
 )

@@ -26,10 +26,31 @@ def generate_launch_description():
         }.items()
     )
 
-    # Spawn a pole (optional)
+    # Spawn a pole
     spawn_pole = Node(
         package='gazebo_ros', executable='spawn_entity.py',
         arguments=['-topic', 'robot_description', '-entity', 'pole'],
+        output='screen'
+    )
+
+    # Spawn a cube bot
+    spawn_cube = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory(package_name), 'launch', 'spawn_cube.launch.py')
+        )
+    )
+
+    # Spawn a turtlebot3
+    spawn_turtlebot = Node(
+        package='gazebo_ros', executable='spawn_entity.py',
+        arguments=[
+            '-file',
+            os.path.join(
+                get_package_share_directory('turtlebot3_description'),
+                'urdf', 'turtlebot3_burger.urdf'
+            ),
+            '-entity', 'turtlebot3'
+        ],
         output='screen'
     )
 
@@ -37,4 +58,5 @@ def generate_launch_description():
         rsp,
         gazebo,
         spawn_pole,
+        spawn_cube,
     ])
