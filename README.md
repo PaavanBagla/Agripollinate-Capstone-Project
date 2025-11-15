@@ -4,7 +4,11 @@ Steps To Run:
 
 # 1. Run the Farm world Simulation
 In terminal 1 run:
+```bash
+colcon build --symlink-install
+source install/setup.bash 
 ros2 launch bee_farm_sim launch_sim.launch.py
+```
 
 # 2. Run the Rviz to see the scan msgs
 In terminal 2 run:
