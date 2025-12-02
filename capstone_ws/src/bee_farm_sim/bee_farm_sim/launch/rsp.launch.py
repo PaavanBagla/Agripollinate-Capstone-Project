@@ -29,6 +29,6 @@ def generate_launch_description():
                 'use_sim_time': True,
                 'robot_description': robot_desc
             }],
-            # ❗ No remapping here — this is the MAIN description
+            # No remapping here — this is the MAIN description
         )
     ])
